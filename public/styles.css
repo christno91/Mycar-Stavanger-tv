@@ -98,17 +98,21 @@ html,body{
   pointer-events:none;
 }
 
-.media img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  transform: scale(1.01);
-  opacity: 0;
-  transition: opacity .45s ease;
+
+/* Wrapperen rundt bildet */
+.media {
+  background: #000;              /* eller en mørk gråtone */
 }
 
-.media img.is-visible{ opacity: 1; }
+/* Selve bildet */
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;           /* viktig */
+  object-position: center;
+  background: #000;              /* fyll “feltene” */
+}
+
 
 .panel{
   display:flex;
