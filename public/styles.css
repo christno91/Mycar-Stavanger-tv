@@ -1,15 +1,15 @@
 :root{
   /* Basis */
-  --bg: #000;
+  --bg: #e60023;
   --fg: #fff;
   --muted: rgba(255,255,255,.72);
   --muted2: rgba(255,255,255,.55);
-  --panel: rgba(255,255,255,.06);
-  --border: rgba(255,255,255,.10);
+  --panel: rgba(0,0,0,.14);
+  --border: rgba(255,255,255,.20);
 
   /* Fine Biler (juster gjerne til eksakte farger fra finebiler.no) */
-  --accent: #e60023;     /* rød */
-  --accentSoft: rgba(230,0,35,.22);
+  --accent: #ffffff;     /* hvit */
+  --accentSoft: rgba(0,0,0,.22);
 
   /* Layout */
   --pad: clamp(22px, 2.4vw, 56px);
@@ -72,7 +72,7 @@ body::before{
   height: clamp(34px, 3.0vw, 62px);
   width: auto;
   display:block;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,.55));
+  filter: brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,.55));
 }
 
 .brandText{ min-width:0; }
@@ -121,7 +121,7 @@ body::before{
   position:relative;
   border-radius: var(--radius);
   overflow:hidden;
-  background: #050505;
+  background: rgba(0,0,0,.22);
   border: 1px solid var(--border);
   box-shadow: 0 25px 60px rgba(0,0,0,.55);
 }
