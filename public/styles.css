@@ -1,15 +1,15 @@
 :root{
   /* Basis */
-  --bg: #e60023;
+  --bg: #f90141;
   --fg: #fff;
   --muted: rgba(255,255,255,.72);
   --muted2: rgba(255,255,255,.55);
-  --panel: rgba(0,0,0,.14);
+  --panel: transparent;
   --border: rgba(255,255,255,.20);
 
   /* Fine Biler (juster gjerne til eksakte farger fra finebiler.no) */
   --accent: #ffffff;     /* hvit */
-  --accentSoft: rgba(0,0,0,.22);
+  --accentSoft: transparent;
 
   /* Layout */
   --pad: clamp(22px, 2.4vw, 56px);
@@ -72,7 +72,7 @@ body::before{
   height: clamp(34px, 3.0vw, 62px);
   width: auto;
   display:block;
-  filter: brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,.55));
+  filter: brightness(0) invert(1);
 }
 
 .brandText{ min-width:0; }
@@ -121,18 +121,12 @@ body::before{
   position:relative;
   border-radius: var(--radius);
   overflow:hidden;
-  background: rgba(0,0,0,.22);
+  background: transparent;
   border: 1px solid var(--border);
-  box-shadow: 0 25px 60px rgba(0,0,0,.55);
-}
+  box-shadow: none;
+  }
 
-.media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(90deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.05) 55%, rgba(0,0,0,0) 100%);
-  pointer-events:none;
-}
+.media::after{ display:none; }
 
 .media img{
   width:100%;
@@ -150,8 +144,8 @@ body::before{
   border-radius: var(--radius);
   background: var(--panel);
   border: 1px solid var(--border);
-  box-shadow: 0 25px 60px rgba(0,0,0,.45);
-  padding: clamp(18px, 1.8vw, 40px);
+  box-shadow: none;
+  padding: clamp(14px, 1.4vw, 28px);
   display:flex;
   flex-direction:column;
   justify-content:space-between;
@@ -199,7 +193,6 @@ body::before{
   font-weight: 950;
   line-height: 1;
   color: var(--accent);
-  text-shadow: 0 12px 30px rgba(0,0,0,.35);
 }
 
 .panelBottom{
@@ -260,4 +253,17 @@ body::before{
   .stage{ grid-template-columns: 1fr; }
   .url{ max-width: 100%; }
   .bottom{ white-space:normal; }
+}
+
+
+/* Header for TV: kun tittel */
+.top{
+  justify-content:flex-start;
+}
+.headline{
+  font-size: var(--h1);
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.05;
+  margin: 0;
 }
