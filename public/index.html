@@ -4,16 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="refresh" content="3600">
-  <title>MyCar Stavanger | Bilslideshow</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Fine Biler AS | Slideshow</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <main class="wrap">
+  <main class="tv">
     <header class="top">
       <div class="brand">
-        <div class="logo">MyCar Stavanger</div>
-        <div class="sub">Biler til salgs nå</div>
+        <img
+          class="brandLogo"
+          src="https://www.finebiler.no/wp-content/uploads/2026/02/logo.svg"
+          alt="Fine Biler AS"
+          decoding="async"
+        />
+        <div class="brandText">
+          <div class="brandTitle">Fine Biler AS</div>
+          <div class="brandSub">Utvalgte biler til salgs</div>
+        </div>
       </div>
+
       <div class="meta">
         <div class="clock" id="clock"></div>
         <div class="updated" id="updated"></div>
@@ -25,40 +34,43 @@
         <img id="carImage" alt="Bilbilde" decoding="async" loading="eager" />
       </div>
 
-      <div class="panel">
-        <div>
+      <aside class="panel">
+        <div class="panelTop">
           <div class="title" id="carTitle"></div>
 
-          <div class="facts">
-            <div class="fact">
-              <div class="k">Årsmodell</div>
-              <div class="v" id="carYear"></div>
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Årsmodell</div>
+              <div class="value" id="carYear"></div>
             </div>
+            <div class="stat">
+              <div class="label">Kilometer</div>
+              <div class="value" id="carKm"></div>
+            </div>
+          </div>
 
-            <div class="fact">
-              <div class="k">Kilometer</div>
-              <div class="v" id="carKm"></div>
-            </div>
-
-            <div class="fact">
-              <div class="k">Pris</div>
-              <div class="v price" id="carPrice"></div>
-            </div>
+          <div class="priceRow">
+            <div class="label">Pris</div>
+            <div class="price" id="carPrice"></div>
           </div>
         </div>
 
-        <div class="cta">
-          <span class="hint">Se detaljer på finn.no</span>
-          <span class="url" id="carUrl"></span>
+        <div class="panelBottom">
+          <div class="linkRow">
+            <div class="hint">Detaljer på FINN</div>
+            <div class="url" id="carUrl"></div>
+          </div>
+          <div class="status" id="status"></div>
         </div>
-      </div>
+      </aside>
     </section>
 
     <footer class="bottom">
-      <div class="status" id="status"></div>
+      <div class="footerLeft">Fine Biler AS · Langflåtveien 35, Stavanger</div>
+      <div class="footerRight">finebiler.no · 51 59 04 90</div>
     </footer>
   </main>
 
-  <script src="/app.js"></script>
+  <script defer src="/app.js"></script>
 </body>
 </html>

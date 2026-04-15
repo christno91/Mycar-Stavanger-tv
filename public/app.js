@@ -21,13 +21,21 @@ let slideTimer = null;
 let refreshTimer = null;
 let imgLoadToken = 0;
 
+function fmtNumber(n) {
+  if (n == null || Number.isNaN(Number(n))) return '';
+  return new Intl.NumberFormat('nb-NO').format(Number(n));
+}
+
 function setStatus(msg) {
+  if (!els.status) return;
   els.status.textContent = msg;
 }
 
 function tickClock() {
   const d = new Date();
-  els.clock.textContent = d.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
+  if (els.clock) {
+    els.clock.textContent = d.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
+  }
 }
 
 function normalizeUrl(url) {
@@ -36,13 +44,15 @@ function normalizeUrl(url) {
     const u = new URL(url);
     return u.host + u.pathname;
   } catch {
-    return url;
+    return String(url);
   }
 }
 
 function setImage(url) {
   imgLoadToken += 1;
   const t = imgLoadToken;
+
+  if (!els.img) return;
 
   els.img.classList.remove('is-visible');
 
@@ -51,13 +61,11 @@ function setImage(url) {
     return;
   }
 
-  const onLoad = () => {
+  els.img.onload = () => {
     if (t !== imgLoadToken) return;
     els.img.classList.add('is-visible');
   };
 
-  // Safari/Chrome trigger load differently depending on cache state
-  els.img.onload = onLoad;
   els.img.onerror = () => {
     if (t !== imgLoadToken) return;
     els.img.classList.remove('is-visible');
@@ -69,15 +77,26 @@ function setImage(url) {
 function showCar(car) {
   if (!car) return;
 
-  els.title.textContent = car.title || '';
-  els.year.textContent = car.modelYear ?? '';
-  els.km.textContent = car.mileageText || '';
-  els.price.textContent = car.priceText || '';
-  els.url.textContent = normalizeUrl(car.adUrl || '');
+  const year = car.modelYear ?? car.year ?? null;
+  const km = car.mileage ?? car.kilometers ?? null;
+
+  if (els.title) els.title.textContent = car.title || '';
+  if (els.year) els.year.textContent = year ? String(year) : '';
+
+  // Foretrekk ferdig tekst fra API, men fall tilbake til tall
+  if (els.km) {
+    els.km.textContent = car.mileageText || (km != null ? `${fmtNumber(km)} km` : '');
+  }
+
+  if (els.price) {
+    els.price.textContent = car.priceText || (car.price != null ? `${fmtNumber(car.price)} kr` : '');
+  }
+
+  if (els.url) els.url.textContent = normalizeUrl(car.adUrl || '');
 
   setImage(car.imageUrl);
 
-  // Preload next image for smoother bytte
+  // Preload neste bilde
   const next = cars[(idx + 1) % cars.length];
   if (next?.imageUrl) {
     const img = new Image();
@@ -102,9 +121,11 @@ async function fetchCars() {
   idx = 0;
 
   const updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
-  els.updated.textContent = updatedAt
-    ? `Oppdatert ${updatedAt.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' })}`
-    : '';
+  if (els.updated) {
+    els.updated.textContent = updatedAt
+      ? `Oppdatert ${updatedAt.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' })}`
+      : '';
+  }
 
   if (!cars.length) {
     setStatus('Ingen biler funnet.');
